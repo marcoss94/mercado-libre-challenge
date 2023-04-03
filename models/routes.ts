@@ -8,8 +8,8 @@ export const Routes = {
     name: "Items",
   },
   CUSTOM_404: {
-    path: "404",
-    name: "404",
+    path: "not-found",
+    name: "Not Found",
   },
 };
 
