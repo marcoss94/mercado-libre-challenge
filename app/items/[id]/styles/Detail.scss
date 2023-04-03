@@ -88,11 +88,14 @@ button:active {
 
 @media screen and (max-width: 768px) {
   .container-detail {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
+    flex-direction: column;
 
     .image {
       margin-bottom: 10px;
+      img {
+        width: 100%;
+      }
     }
 
     .right {
