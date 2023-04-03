@@ -1,11 +1,9 @@
 import { Breadcrumbs } from "@/components";
 import { getItems } from "./service";
 import "./styles/Detail.scss";
-import Image from "next/image";
-import { Functions } from "@/utilities";
-import shippingIcon from "@/app/items/assets/icShipping.png";
 import React from "react";
 import { NotFoundItem } from "@/components/NotFoundItem";
+import { Price } from "./components";
 
 interface IProps {
   params: { id: string };
@@ -17,12 +15,6 @@ async function Detail({ params }: IProps) {
   if (!data) {
     return <NotFoundItem />;
   }
-
-  const decimals = data.item.price.decimals * 100;
-  let condition = data?.item.condition === "new" ? "Nuevo" : "Usado";
-  let soldQuantity = data?.item.soldQuantity
-    ? `- ${data?.item.soldQuantity} vendidos`
-    : "";
 
   const parseText = (text: string): JSX.Element[] => {
     const lines = text.split(/(\r\n|\n)/);
@@ -43,35 +35,23 @@ async function Detail({ params }: IProps) {
     <>
       <Breadcrumbs categories={data?.item?.categories} />
       <article className="container-detail">
-        <div className="left">
-          <div className="image">
-            <img
-              src={data.item.pictures?.[0].url || ""}
-              alt={`Imagen del producto ${data.item.title}`}
-            />
-          </div>
-          <div className="description">
-            <div className="title">Descripción del producto</div>
-            <p>{parseText(data.item.description)}</p>
-          </div>
+        <div className="image">
+          <img
+            src={data.item.pictures?.[0].url || ""}
+            alt={`Imagen del producto ${data.item.title}`}
+          />
         </div>
-        <div className="right">
-          <div className="condition">{`${condition} ${soldQuantity}`}</div>
-          <h1 className="title">{data.item.title}</h1>
-          <div className="price">
-            <span className="amount">
-              {`$ ${Functions.formatNumber(data.item.price.amount)}`}
-            </span>
-            <span className="decimals">
-              {decimals ? decimals.toFixed(0) : "00"}
-            </span>
-            <span className="free-shipping">
-              {data.item.freeShipping && (
-                <Image src={shippingIcon} alt="Icono free shipping" />
-              )}
-            </span>
-          </div>
-          <button>Comprar</button>
+        <Price
+          soldQuantity={data?.item.soldQuantity}
+          title={data?.item.title}
+          amount={data.item.price.amount}
+          condition={data?.item.condition}
+          decimals={data?.item.price.decimals}
+          freeShipping={data?.item.freeShipping}
+        />
+        <div className="description">
+          <div className="title">Descripción del producto</div>
+          <p>{parseText(data.item.description)}</p>
         </div>
       </article>
     </>

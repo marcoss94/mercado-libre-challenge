@@ -11,7 +11,7 @@ interface IItemParce {
   price: IPrice;
   picture: string;
   condition: string;
-  freeShipping: Boolean;
+  freeShipping: boolean;
   soldQuantity: number;
   description: string;
   categories: string[];

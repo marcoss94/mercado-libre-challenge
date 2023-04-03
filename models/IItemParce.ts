@@ -4,7 +4,7 @@ export interface IItemParce {
   price: IPrice;
   picture: string;
   condition: string;
-  freeShipping: Boolean;
+  freeShipping: boolean;
   address: IAddress;
 }
 
