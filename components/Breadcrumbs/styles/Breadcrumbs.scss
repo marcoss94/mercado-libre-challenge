@@ -1,0 +1,15 @@
+.breadcrumbs-container {
+  color: #999999;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 16px 0;
+
+  span:not(.last):after {
+    content: ">";
+    margin: 0 8px;
+  }
+
+  .last {
+    font-weight: 900;
+  }
+}
