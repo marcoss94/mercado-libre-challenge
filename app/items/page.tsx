@@ -7,6 +7,7 @@ import "./styles/Container.scss";
 async function Items({ searchParams }: { searchParams: { search: string } }) {
   const query = searchParams.search;
   const data = await searchService(query);
+  console.log(data);
 
   if (data?.items.length === 0) {
     return <NotFoundItem />;
